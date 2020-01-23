@@ -1,4 +1,6 @@
-import { Controller, Param, Get, ParseIntPipe, Post, UsePipes, Body, ValidationPipe, Delete, Patch, Query} from '@nestjs/common';
+import { Controller, Param, Get, ParseIntPipe, Post, UsePipes, Body, ValidationPipe, Delete, Patch, Query, UseGuards} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+
 import { TasksService } from './tasks.service';
 import { Task } from './task.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
@@ -7,6 +9,7 @@ import { TaskStatus } from './task-status.enum';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 
 @Controller('tasks')
+@UseGuards(AuthGuard())
 export class TasksController {
   constructor(private tasksService: TasksService) {}
 
