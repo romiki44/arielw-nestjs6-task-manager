@@ -11,6 +11,11 @@ async function bootstrap() {
   const serverConfig=config.get('server');
   //console.log('serverConfig: ', serverConfig);
 
+  if(process.env.NODE_ENV==='development') {
+    console.log('cors enabled...');
+    app.enableCors();
+  }
+
   const port=process.env.PORT || serverConfig.port;
   await app.listen(port);
   logger.log(`Application listening on port ${port}`);
