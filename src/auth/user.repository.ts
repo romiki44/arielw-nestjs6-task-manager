@@ -14,11 +14,12 @@ export class UserRepository extends Repository<User> {
     // const exist=this.findOne({username});
     // if(exist) {}
 
-    const user=new User();
+    //const user=new User();
+    const user=this.create(); //kvoli unit testom!!
     user.username=username;
     user.salt=await bcrypt.genSalt();
     user.password=await this.hashPassword(password, user.salt);
-    console.log(user.password);
+    //console.log(user.password);
 
     try{
       await user.save();
